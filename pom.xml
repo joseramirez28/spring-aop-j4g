@@ -9,13 +9,18 @@
 	<properties>
 		<spring.version>4.3.7.RELEASE</spring.version>
 		<aspectj.version>1.8.10</aspectj.version>
+		<junit.version>4.12</junit.version>
+		<slf4j.version>1.7.19</slf4j.version>
+		<log4j.version>1.2.17</log4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.12</version>
+			<version>${junit.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
