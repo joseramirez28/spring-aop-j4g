@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+    http://www.springframework.org/schema/aop   
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+	<!-- No need to declare proxy -->
+	<aop:aspectj-autoproxy />
+	<!-- App beans -->
+	<bean id="client1" class="org.l4g.spring.xml.model.ClientInfo">
+		<property name="name" value="Jose Ramirez" />
+		<property name="email" value="jose_ramirez2@outlook.com" />
+		<property name="daysWithoutShopping" value="1" />
+	</bean>
+
+	<bean id="client2" class="org.l4g.spring.xml.model.ClientInfo">
+		<property name="name" value="Juan Alvarez" />
+		<property name="email" value="juan_alv@hotmail.com" />
+		<property name="daysWithoutShopping" value="40" />
+	</bean>
+
+	<bean id="client3" class="org.l4g.spring.xml.model.ClientInfo">
+		<property name="name" value="Patricia Montes" />
+		<property name="email" value="patriciam@gmail.com" />
+		<property name="daysWithoutShopping" value="-2" />
+	</bean>
+	<!-- Beans for our aspects -->
+	<bean id="aspectBean" class="org.j4g.spring.xml.aop.ClientAdvise" />
+
+	<!-- Bind aspect to the logic -->
+	<aop:config>
+		<aop:aspect id="beforeAspect" ref="aspectBean">
+			<!-- @Before -->
+			<aop:pointcut id="pointCutBefore"
+				expression="execution(* org.l4g.spring.xml.model.ClientInfo.printClientInfo(..))" />
+			<aop:before method="beforeAdvice" pointcut-ref="pointCutBefore" />
+		</aop:aspect>
+
+		<aop:aspect id="AfterAspect" ref="aspectBean">
+			<!-- @After -->
+			<aop:pointcut id="pointCutAfter"
+				expression="execution(* org.l4g.spring.xml.model.ClientInfo.printClientInfo(..))" />
+			<aop:after method="afterAdvice" pointcut-ref="pointCutAfter" />
+		</aop:aspect>
+
+		<aop:aspect id="AroundAspect" ref="aspectBean">
+			<!-- @Around -->
+			<aop:pointcut id="pointCutAround"
+				expression="execution(* 
+				org.l4g.spring.xml.model.ClientInfo.printName(..))" />
+			<aop:around method="aroundAdvice" pointcut-ref="pointCutAround" />
+		</aop:aspect>
+		
+		<aop:aspect id="AfterReturningAspect" ref="aspectBean"> 
+			<!-- @AfterReturning -->
+			<aop:pointcut id="pointCutAfterReturning"
+				expression="execution(* org.l4g.spring.xml.model.ClientInfo.isClientInExpiredStatus(..))" />
+			<aop:after-returning method="afterReturningAdvice"
+				returning="result" pointcut-ref="pointCutAfterReturning" />
+		</aop:aspect>
+
+		<aop:aspect id="AfterThrowingAspect" ref="aspectBean">
+			<!-- @AfterThrowing -->
+			<aop:pointcut id="pointCutAfterThrowing"
+				expression="execution(* org.l4g.spring.xml.model.ClientInfo.isClientInExpiredStatus(..))" />
+			<aop:after-throwing throwing="error" method="afterThrowingAdvice"
+				pointcut-ref="pointCutAfterThrowing" />
+		</aop:aspect>
+
+	</aop:config>
+</beans>
