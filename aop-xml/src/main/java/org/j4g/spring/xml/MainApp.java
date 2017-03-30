@@ -1,4 +1,4 @@
-package org.j4g.spring.aop;
+package org.j4g.spring.xml;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
