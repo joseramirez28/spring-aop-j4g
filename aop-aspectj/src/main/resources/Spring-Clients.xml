@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+    http://www.springframework.org/schema/aop   
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+	<!-- No need to declare proxy -->
+	<aop:aspectj-autoproxy />
+	<!-- App beans -->
+	<bean id="client1" class="org.l4g.spring.xml.model.ClientInfo">
+		<property name="name" value="Jose Ramirez" />
+		<property name="email" value="jose_ramirez2@outlook.com" />
+		<property name="daysWithoutShopping" value="1" />
+	</bean>
+
+	<bean id="client2" class="org.l4g.spring.xml.model.ClientInfo">
+		<property name="name" value="Juan Alvarez" />
+		<property name="email" value="juan_alv@hotmail.com" />
+		<property name="daysWithoutShopping" value="40" />
+	</bean>
+
+	<bean id="client3" class="org.l4g.spring.xml.model.ClientInfo">
+		<property name="name" value="Patricia Montes" />
+		<property name="email" value="patriciam@gmail.com" />
+		<property name="daysWithoutShopping" value="-2" />
+	</bean>
+	<!-- Beans for our aspects -->
+	<bean id="aspectBean" class="org.j4g.spring.xml.aop.ClientAdvise" />
+
+</beans>
