@@ -49,7 +49,7 @@ public class ClientAdvise {
 	}
 
 	@AfterThrowing(pointcut = "execution(* org.l4g.spring.xml.model.ClientInfo.isClientInExpiredStatus(..))", throwing = "error")
-	public void afterThrowingAdvice(JoinPoint jp, Throwable error) throws Exception {
+	public void afterThrowingAdvice(JoinPoint jp, Throwable error) {
 		System.out.println("[@AfterThrowing]Advice executing after returning method...");
 	}
 
